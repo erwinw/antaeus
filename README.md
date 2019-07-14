@@ -59,9 +59,9 @@ Happy hacking 😁!
 - [JUnit 5](https://junit.org/junit5/) - Testing framework
 - [Mockk](https://mockk.io/) - Mocking library
 
-## Monthly invoice development notes
+## Invoice charging development notes
 
-It is unclear how monthly invoice processing is to be triggered. For the purpose of this exercise I will assume that it is triggered by calling a specific API end point. This has the following advantages:
+It is unclear how monthly invoice charging is to be triggered. For the purpose of this exercise I will assume that it is triggered by calling a specific API end point (`/rest/v1/charge_invoices`). This has the following advantages:
 
 1. Simplicity of implementation;
 2. Simplicity of testing;
@@ -69,5 +69,5 @@ It is unclear how monthly invoice processing is to be triggered. For the purpose
 
 This approach has the following disadvantages:
 
-1. If the API endpoint gets called multiple times, invoices might end up being "paid" twice;
+1. If the API endpoint gets called multiple times, invoices might end up being "paid" twice (since listing the invoices and charging them is not atomic);
 2. I don't know if there is a duration limitation for API calls; if there are many invoices to be paid we might hit that timeout.

@@ -78,8 +78,8 @@ class AntaeusRest (
                        }
                    }
 
-                   path("billing") {
-                       // URL: /rest/v1/billing/monthly
+                   path("charge_invoices") {
+                       // URL: /rest/v1/charge_invoices
                        post {
                            it.json(billingService.createMonthly())
                        }
