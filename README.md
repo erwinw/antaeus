@@ -71,3 +71,7 @@ This approach has the following disadvantages:
 
 1. If the API endpoint gets called multiple times, invoices might end up being "paid" twice (since listing the invoices and charging them is not atomic);
 2. I don't know if there is a duration limitation for API calls; if there are many invoices to be paid we might hit that timeout.
+
+### Time spent
+
+Roughly 6 hours coding, a few hours getting the right JVM version (11)

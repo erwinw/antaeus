@@ -25,7 +25,7 @@ class BillingServiceTest {
     @Test
     fun `empty invoice test`() {
         val dal = mockk<AntaeusDal> {
-            every { fetchInvoices() } returns emptyList<Invoice>()
+            every { fetchUnpaidInvoices() } returns emptyList<Invoice>()
         }
 
         val invoiceService = InvoiceService(dal = dal)
@@ -42,7 +42,7 @@ class BillingServiceTest {
     @Test
     fun `successful charge test`() {
         val dal = mockk<AntaeusDal> {
-            every { fetchInvoices() } returns listOf(invoice)
+            every { fetchUnpaidInvoices() } returns listOf(invoice)
             every { markInvoicePaid(invoiceId) } just Runs
         }
 
@@ -62,7 +62,7 @@ class BillingServiceTest {
     @Test
     fun `failed charge test`() {
         val dal = mockk<AntaeusDal> {
-            every { fetchInvoices() } returns listOf(invoice)
+            every { fetchUnpaidInvoices() } returns listOf(invoice)
             verify (atLeast = 0, atMost = 0) { markInvoicePaid(invoiceId) }
         }
 
@@ -82,7 +82,7 @@ class BillingServiceTest {
     @Test
     fun `CustomerNotFoundException test`() {
         val dal = mockk<AntaeusDal> {
-            every { fetchInvoices() } returns listOf(invoice)
+            every { fetchUnpaidInvoices() } returns listOf(invoice)
             verify (atLeast = 0, atMost = 0) { markInvoicePaid(invoiceId) }
         }
 
@@ -102,7 +102,7 @@ class BillingServiceTest {
     @Test
     fun `CurrencyMismatchException test`() {
         val dal = mockk<AntaeusDal> {
-            every { fetchInvoices() } returns listOf(invoice)
+            every { fetchUnpaidInvoices() } returns listOf(invoice)
             verify (atLeast = 0, atMost = 0) { markInvoicePaid(invoiceId) }
         }
 
@@ -122,7 +122,7 @@ class BillingServiceTest {
     @Test
     fun `NetworkException Exception test`() {
         val dal = mockk<AntaeusDal> {
-            every { fetchInvoices() } returns listOf(invoice)
+            every { fetchUnpaidInvoices() } returns listOf(invoice)
             every { markInvoicePaid(invoiceId) } just Runs
         }
 

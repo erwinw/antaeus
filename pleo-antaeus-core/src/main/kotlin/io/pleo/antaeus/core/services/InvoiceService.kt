@@ -13,6 +13,10 @@ class InvoiceService(private val dal: AntaeusDal) {
        return dal.fetchInvoices()
     }
 
+    fun fetchAllUnpaid(): List<Invoice> {
+       return dal.fetchUnpaidInvoices()
+    }
+
     fun fetch(id: Int): Invoice {
         return dal.fetchInvoice(id) ?: throw InvoiceNotFoundException(id)
     }

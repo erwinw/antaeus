@@ -41,14 +41,13 @@ class BillingService(
         return false;
     }
 
-    // TODO - Add code e.g. here
     fun createMonthly(): Boolean {
-       val invoices = this.invoiceService.fetchAll()
-       for (invoice in invoices) {
-           if (invoice.status == InvoiceStatus.PENDING && this.attemptToPayInvoice(invoice)) {
-               this.invoiceService.markInvoicePaid(invoice)
-           }
-       }
-       return true
+        val invoices = this.invoiceService.fetchAllUnpaid()
+        for (invoice in invoices) {
+            if (this.attemptToPayInvoice(invoice) ) {
+                this.invoiceService.markInvoicePaid(invoice)
+            }
+        }
+        return true
     }
 }
